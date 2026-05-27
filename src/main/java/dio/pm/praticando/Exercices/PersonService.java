@@ -1,32 +1,22 @@
 package dio.pm.praticando.Exercices;
 
-import java.time.OffsetDateTime;
-
 import org.springframework.stereotype.Service;
 
 @Service
 public class PersonService {
     
-    public void validator(String name, Integer birth){
+    public void validator(Double sideA, Double sideB){
         
-        if(name == null || name.trim() == ""){
-            throw new IllegalArgumentException("Name cannot be void or blank");
+        if(sideA <= 0 || sideB <= 0){
+            throw new IllegalArgumentException("Only positive values are accepted");
         }
-        if(!(name instanceof String)){
-            throw new IllegalArgumentException("Name need to be an String");
-        }
-        if(birth <= 0){
-            throw new IllegalArgumentException("Birth need to be an Integer bigget than zero");
-        }
-        if(!(birth instanceof Integer)){
-            throw new IllegalArgumentException("Birth need to  be an Integer");
-        }
+
     }
 
-    public Integer calculateAge(Integer birth){
-        var todayYear = OffsetDateTime.now().getYear();
-    
-        return todayYear - birth;
+    public Double calculateArea(Double sideA, Double sideB){
+        
+        return sideA * sideB;
+
     }
 
 }

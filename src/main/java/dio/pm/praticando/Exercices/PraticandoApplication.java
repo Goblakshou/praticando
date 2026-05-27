@@ -11,19 +11,19 @@ public class PraticandoApplication {
 		
 	var scanner = new Scanner(System.in);
 
-	System.out.print("Insert your name: ");
-	var name = scanner.nextLine();
+	System.out.print("Insert a side from the area: ");
+	var sideA = Double.parseDouble(scanner.nextLine());
 
-	System.out.print("Insert your birth age: ");
-	var birth = Integer.parseInt(scanner.nextLine());
+	System.out.print("Insert the other side from your area: ");
+	var sideB = Double.parseDouble(scanner.nextLine());
 
 	var service = new PersonService();
 
-	service.validator(name, birth);
+	service.validator(sideA, sideB);
+	
+	var result = service.calculateArea(sideA, sideB);
 
-	var age = service.calculateAge(birth);
-
-	System.out.println("Hello " + name + "! You have " + age + " years.");
+	System.out.println("The area value is: " + result + "m²");
 
 	}
 
