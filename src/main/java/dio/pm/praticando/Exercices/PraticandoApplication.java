@@ -11,19 +11,19 @@ public class PraticandoApplication {
 		
 	var scanner = new Scanner(System.in);
 
-	System.out.print("Insert a side from the area: ");
-	var sideA = Double.parseDouble(scanner.nextLine());
+	System.out.print("Insert the base from the triangle: ");
+	var base = Double.parseDouble(scanner.nextLine());
 
-	System.out.print("Insert the other side from your area: ");
-	var sideB = Double.parseDouble(scanner.nextLine());
+	System.out.print("Insert the height from the triangle: ");
+	var height = Double.parseDouble(scanner.nextLine());
 
 	var service = new PersonService();
 
-	service.validator(sideA, sideB);
+	service.validator(base, height);
 	
-	var result = service.calculateArea(sideA, sideB);
+	var result = service.calculateArea(base, height);
 
-	System.out.println("The area value is: " + result + "m²");
+	System.out.println("The triangle's area value is: " + result + "m²");
 
 	}
 
