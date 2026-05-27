@@ -9,21 +9,36 @@ public class PraticandoApplication {
 
 	public static void main(String[] args) {
 		
-	var scanner = new Scanner(System.in);
+		var service = new PersonService();	
 
-	System.out.print("Insert the base from the triangle: ");
-	var base = Double.parseDouble(scanner.nextLine());
+		var scanner = new Scanner(System.in);
 
-	System.out.print("Insert the height from the triangle: ");
-	var height = Double.parseDouble(scanner.nextLine());
+		System.out.print("Insert the first people NAME: ");
+		var nameA = scanner.nextLine();
+		System.out.print("Insert the first people AGE: ");
+		var ageA = Integer.parseInt(scanner.nextLine());
 
-	var service = new PersonService();
+		System.out.print("Insert the second people NAME: ");
+		var nameB = scanner.nextLine();
+		System.out.print("Insert the second people AGE: ");
+		var ageB = Integer.parseInt(scanner.nextLine());
 
-	service.validator(base, height);
-	
-	var result = service.calculateArea(base, height);
+		var personA = new Person();
+		personA.setName(nameA);
+		personA.setAge(ageA);
 
-	System.out.println("The triangle's area value is: " + result + "m²");
+		var personB = new Person();
+		personB.setName(nameB);
+		personB.setAge(ageB);
+
+		var difference = service.treatData(personA, personB);
+
+		System.out.println("Person A - Name: " + personA.getName() + " Age: " + personA.getAge());
+		System.out.println("Person B - Name: " + personB.getName() + " Age: " + personB.getAge());
+		System.out.println("======================================");
+		System.out.println("The difference between the ages is: " + difference + " year(s).");
+
+		scanner.close();
 
 	}
 

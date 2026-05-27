@@ -4,18 +4,36 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PersonService {
-    
-    public void validator(Double sideA, Double sideB){
+
+    public Integer treatData(Person personA, Person personB){
+
+        validateValue(personA, personB);
         
-        if(sideA <= 0 || sideB <= 0){
-            throw new IllegalArgumentException("Only positive values are accepted");
-        }
+        return calculateAge(personA.getAge(), personB.getAge());
 
     }
 
-    public Double calculateArea(Double sideA, Double sideB){
+    private void validateValue(Person personA, Person personB){
         
-        return sideA * sideB;
+        if(personA.getAge() <= 0 || personB.getAge() <= 0){
+            throw new IllegalArgumentException("Only positive values are accepted on age");
+        }
+        if(personA.getName() == null || personA.getName().trim() == ""){
+            throw new IllegalArgumentException("Name cannot be null or empty");            
+        }
+        if(personB.getName() == null || personB.getName().trim() == ""){
+            throw new IllegalArgumentException("Name cannot be null or empty");                        
+        }        
+
+    }
+
+    private Integer calculateAge(Integer ageA, Integer ageB){
+        
+        if(ageA > ageB){
+            return ageA - ageB;
+        }
+
+        return ageB - ageA;
 
     }
 
