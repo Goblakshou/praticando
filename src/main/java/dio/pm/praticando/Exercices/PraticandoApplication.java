@@ -7,19 +7,27 @@ public class PraticandoApplication {
 	public static void main(String[] args) {
 		
 		var scanner = new Scanner(System.in);
-		var person = new Person();
-		var calculate = new CalculateIMC();
+		var service = new PraticandoService();
+		var option = ""; 
 
-		System.out.print("Insert the height: ");
-		var height = Double.parseDouble(scanner.nextLine());
+		System.out.print("Insert a number: ");
+		var minNum = Integer.parseInt(scanner.nextLine());
 
-		System.out.print("Insert the weight: ");
-		var weight = Double.parseDouble(scanner.nextLine());
+		System.out.print("Insert another larger number: ");
+		var maxNum = Integer.parseInt(scanner.nextLine());
 
-		person.setHeight(height);
-		person.setWeight(weight);
+		do {
 
-		calculate.calculateIMC(height, weight);
+			System.out.println("1 - Odd");
+			System.out.println("2 - Even");
+			System.out.print("Chose a option:");
+
+			option = scanner.nextLine();
+			
+		} while (!((option.equals("1")) || (option.equals("2"))));
+
+		System.out.println(option);
+		service.calculateNumber(minNum, maxNum, option);
 
 	}
 
