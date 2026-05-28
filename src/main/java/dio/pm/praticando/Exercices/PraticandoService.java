@@ -2,49 +2,15 @@ package dio.pm.praticando.Exercices;
 
 public class PraticandoService {
     
-    public void calculateNumber(Integer minNum, Integer maxNum, String option){
+    public Boolean calculateNumber(Integer numberA, Integer numberB){
 
-        validateValues(minNum, maxNum);
-        
-        if(option.equals("2")){
-
-            System.out.println("=============\nEven:");
-
+        if(numberB / numberA != 0 && numberB > numberA){
+            return true;
         }
 
-        System.out.println("=============\nOdd:");
-        
-            do {
+        System.out.println("Insert a valid number (bigger than the first number and a Integer positive).");
+        return false;
 
-                var result = minNum + (maxNum - minNum);
-
-                if(option.equals("2") && result % 2 == 0){
-
-                    System.out.println(result);
-
-                }
-                if(option.equals("1") && result % 2 != 0){
-
-                    System.out.println(result);
-
-                }
-            
-                maxNum --;
-
-            } while (!(maxNum < minNum));
-        
-    }
-
-    private void validateValues(Integer minNum, Integer maxNum){
-        if(minNum <= 0 || !(minNum instanceof Integer)){
-            throw new IllegalArgumentException("The values need to be Integer and positive");
-        }
-        if(maxNum <= 0 || !(maxNum instanceof Integer)){
-            throw new IllegalArgumentException("The values need to be Integer and positive");
-        }
-        if(minNum > maxNum){
-            throw new IllegalArgumentException("The second number need to be more than the first");            
-        }
     }
 
 }

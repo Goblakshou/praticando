@@ -8,27 +8,22 @@ public class PraticandoApplication {
 		
 		var scanner = new Scanner(System.in);
 		var service = new PraticandoService();
-		var option = ""; 
 
+		System.out.println("Calculator of the rest");
 		System.out.print("Insert a number: ");
-		var minNum = Integer.parseInt(scanner.nextLine());
-
-		System.out.print("Insert another larger number: ");
-		var maxNum = Integer.parseInt(scanner.nextLine());
+		var numberA = Integer.parseInt(scanner.nextLine());
+		Integer numberB;
 
 		do {
 
-			System.out.println("1 - Odd");
-			System.out.println("2 - Even");
-			System.out.print("Chose a option:");
 
-			option = scanner.nextLine();
-			
-		} while (!((option.equals("1")) || (option.equals("2"))));
+		System.out.print("Insert another number: ");
+		numberB = Integer.parseInt(scanner.nextLine());
 
-		System.out.println(option);
-		service.calculateNumber(minNum, maxNum, option);
+		} while (!(service.calculateNumber(numberA, numberB)));
 
-	}
+		System.out.println("Result: " + numberB / numberA);
+
+	} 
 
 }
