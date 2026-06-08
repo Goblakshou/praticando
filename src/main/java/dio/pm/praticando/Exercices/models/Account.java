@@ -3,9 +3,9 @@ package dio.pm.praticando.exercices.models;
 public class Account {
 
     private Long id;
-    private String nome;
-    private Double saldo;
-    private Double chequeEspecial;
+    private String name;
+    private Double balance;
+    private Double specialCheck;
 
     public Long getId() {
         return id;
@@ -15,28 +15,28 @@ public class Account {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String nome) {
+        this.name = nome;
     }
 
-    public Double getSaldo() {
-        return saldo;
+    public Double getBalance() {
+        return balance;
     }
 
-    public void setSaldo(Double saldo) {
-        this.saldo = saldo;
+    public void setBalance(Double saldo) {
+        this.balance = saldo;
     }
 
-    public Double getChequeEspecial() {
-        return chequeEspecial;
+    public Double getSpecialCheck() {
+        return specialCheck;
     }
 
-    public void setChequeEspecial(Double chequeEspecial) {
-        this.chequeEspecial = chequeEspecial;
+    public void setSpecialCheck(Double chequeEspecial) {
+        this.specialCheck = chequeEspecial;
     }
 
 

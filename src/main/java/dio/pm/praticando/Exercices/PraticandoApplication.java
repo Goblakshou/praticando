@@ -13,23 +13,23 @@ public class PraticandoApplication {
 		var opcao = "";
 
 		do {
-			System.out.println("");
-			System.out.println("1 - Consultar Saldo");
-			System.out.println("2 - Depositar Dinheiro");
-			System.out.println("3 - Sacar Dinheiro");
-			System.out.println("4 - Pagar um Boleto");
-			System.out.println("5 - Abrir uma Conta");
-			System.out.print("Insira a opção desejada: ");
+			System.out.println("BANK SYSTEM");
+			System.out.println("1 - Consult Balance");
+			System.out.println("2 - Deposit Money");
+			System.out.println("3 - Withdraw Money");
+			System.out.println("4 - Pay Bill");
+			System.out.println("5 - Open Account");
+			System.out.print("Enter the desired option: ");
 			opcao = scanner.nextLine();
 			
 			switch(opcao){
-				case "1" -> service.consultaSaldo(scanner);
-				case "2" -> service.deposito(scanner);
-				case "3" -> service.saque(scanner);
-				case "4" -> service.pagaBoleto(scanner);
-				case "5" -> service.abrirConta(scanner);
-				case "q" -> System.out.println("Saindo do Sistema...");
-				default -> System.out.println("Opção Incorreta");
+				case "1" -> service.consultBalance(scanner);
+				case "2" -> service.deposit(scanner);
+				case "3" -> service.withdrawal(scanner);
+				case "4" -> service.payBill(scanner);
+				case "5" -> service.openAccount(scanner);
+				case "q" -> System.out.println("Exiting the system...");
+				default -> System.out.println("Invalid option");
 			}
 
 		} while (!(opcao.equals("q")));

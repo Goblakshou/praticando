@@ -6,30 +6,30 @@ import java.util.List;
 import dio.pm.praticando.exercices.models.Account;
 
 public class AccountRepository{
-    private List<Account> contas = new ArrayList<>();
-    private Long idAtual = 1L;
+    private List<Account> accounts = new ArrayList<>();
+    private Long currentId = 1L;
     
-    public List<Account> listarContas(){
-        return contas;
+    public List<Account> listAccounts(){
+        return accounts;
     }
 
-    public Account buscarConta(Long id){
-        for (Account conta : contas) {
-            if(conta.getId().equals(id)){
-                return conta;
+    public Account searchAccount(Long id){
+        for (Account account : accounts) {
+            if(account.getId().equals(id)){
+                return account;
             }
         }
         return null;
     }
 
-    public void salvarConta(Account conta, Double saldo){
+    public void saveAccount(Account account, Double balance){
         
-        conta.setId(idAtual);
-        conta.setSaldo(saldo);
+        account.setId(currentId);
+        account.setBalance(balance);
 
-        contas.add(conta);
+        accounts.add(account);
 
-        idAtual++;
+        currentId++;
 
     }
 

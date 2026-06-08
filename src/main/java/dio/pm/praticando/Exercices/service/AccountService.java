@@ -10,147 +10,147 @@ public class AccountService {
 
     AccountRepository repository = new AccountRepository();
     
-    public void consultaSaldo(Scanner scanner){
-        var id = questionarId(scanner);
+    public void consultBalance(Scanner scanner){
+        var id = questionId(scanner);
 
-        if(!(repository.buscarConta(id) != null)){
-            System.out.println("Conta não encontrada!");
+        if(!(repository.searchAccount(id) != null)){
+            System.out.println("Account not found.");
             return;
         }
 
-        var saldo = repository.buscarConta(id).getSaldo();
-        var chequeEspecial = repository.buscarConta(id).getChequeEspecial();
-        var nome = repository.buscarConta(id).getNome();
+        var balance = repository.searchAccount(id).getBalance();
+        var specialCheck = repository.searchAccount(id).getSpecialCheck();
+        var name = repository.searchAccount(id).getName();
 
-        System.out.println("Nome: " + nome + "\nSaldo: R$" + saldo + "\nCheque Especial: R$" + chequeEspecial);
+        System.out.println("Name: " + name + "\nBalance: $" + balance + "\nOverdraft: $" + specialCheck);
     }
 
-    public void deposito(Scanner scanner){
-        var id = questionarId(scanner);
+    public void deposit(Scanner scanner){
+        var id = questionId(scanner);
 
-        if(!(repository.buscarConta(id) != null)){
-            System.out.println("Conta não encontrada!");
+        if(!(repository.searchAccount(id) != null)){
+            System.out.println("Account not found.");
             return;
         }        
 
-        var conta = repository.buscarConta(id);
+        var account = repository.searchAccount(id);
 
-        System.out.print("Valor do Depósito: ");
-        var depositoString = scanner.nextLine();
+        System.out.print("Deposit value: $");
+        var depositString = scanner.nextLine();
 
-        if(!(depositoString != null || depositoString.matches("-?\\d+(\\.\\d+)?"))){
-            System.out.println("O valor do boleto deve ser um Double.");
+        if(!(depositString != null || depositString.matches("-?\\d+(\\.\\d+)?"))){
+            System.out.println("The deposit value must be a valid number.");
             return;
         }            
 
-        var deposito = Double.parseDouble(depositoString);
+        var deposit = Double.parseDouble(depositString);
 
-        if(deposito <= 0){
-            System.out.println("O valor do depósito deve ser maior que 0.");
+        if(deposit <= 0){
+            System.out.println("The deposit value must be greater than 0.");
             return;
         }
 
-        conta.setSaldo(conta.getSaldo() + deposito);
+        account.setBalance(account.getBalance() + deposit);
 
-        System.out.println("Depósito Realizado!\n+ R$" + deposito);
+        System.out.println("Deposit successfully completed!\n+ $" + deposit);
 
     }
     
-    public void saque(Scanner scanner){
-        var id = questionarId(scanner);
+    public void withdrawal(Scanner scanner){
+        var id = questionId(scanner);
 
-        if(!(repository.buscarConta(id) != null)){
-            System.out.println("Conta não encontrada!");
+        if(!(repository.searchAccount(id) != null)){
+            System.out.println("Account not found.");
             return;
         }        
 
-        var conta = repository.buscarConta(id);
+        var account = repository.searchAccount(id);
 
-        System.out.print("Valor do Saque: ");
-        var saqueString = scanner.nextLine();
+        System.out.print("Withdrawal amount: $");
+        var withdrawalString = scanner.nextLine();
 
-        if(!(saqueString != null || saqueString.matches("-?\\d+(\\.\\d+)?"))){
-            System.out.println("O valor do saque deve ser um Double.");
+        if(!(withdrawalString != null || withdrawalString.matches("-?\\d+(\\.\\d+)?"))){
+            System.out.println("The withdrawal amount must be a valid number.");
             return;
         }
 
-        var saque = Double.parseDouble(saqueString);
+        var withdrawal = Double.parseDouble(withdrawalString);
 
-        if(saque <= 0){
-            System.out.println("O valor do saque deve ser maior que 0.");
+        if(withdrawal <= 0){
+            System.out.println("The withdrawal amount must be greater than 0.");
             return;
         }
 
-        if(saque > conta.getSaldo()){
-            if(conta.getSaldo() + conta.getChequeEspecial() > saque){
-                var opcao = "";
+        if(withdrawal > account.getBalance()){
+            if(account.getBalance() + account.getSpecialCheck() > withdrawal){
+                var option = "";
 
-                System.out.println("Saldo insuficiente!");
-                System.out.println("Saldo: R$" + conta.getSaldo() + "\nCheque Especial: R$" + conta.getChequeEspecial());
+                System.out.println("Insufficient balance!");
+                System.out.println("Balance: $" + account.getBalance() + "\nOverdraft: $" + account.getSpecialCheck());
                 do {
 
-                    System.out.print("Deseja utilizar o Cheque Especial (O valor de 20% será cobrado)?\n(S/N): ");
-                    opcao = scanner.nextLine();
+                    System.out.print("Do you want to use the overdraft? A 20% fee will be charged.\n(Y/N): ");
+                    option = scanner.nextLine();
                     
-                } while (!(opcao.equals("s")||opcao.equals("n")));
+                } while (!(option.equals("y")||option.equals("n")));
 
-                if(opcao.equals("s")){
-                    var resto = conta.getSaldo() - saque;
-                    utilizarChequeEspecial(resto, conta);
-                    conta.setSaldo(0.0);
+                if(option.equals("y")){
+                    var rest = account.getBalance() - withdrawal;
+                    useSpecialCheck(rest, account);
+                    account.setBalance(0.0);
                 }
             }
             return;
         }
 
-        conta.setSaldo(conta.getSaldo() - saque);
+        account.setBalance(account.getBalance() - withdrawal);
 
-        System.out.println("Saque Realizado!\n- R$" + saque);
+        System.out.println("Withdrawal completed!\n- $" + withdrawal);
         
     }
     
-    public void pagaBoleto(Scanner scanner){
-        var id = questionarId(scanner);
+    public void payBill(Scanner scanner){
+        var id = questionId(scanner);
 
-        if(!(repository.buscarConta(id) != null)){
-            System.out.println("Conta não encontrada!");
+        if(!(repository.searchAccount(id) != null)){
+            System.out.println("Account not found.");
             return;
         }
 
-        var conta = repository.buscarConta(id);
+        var account = repository.searchAccount(id);
 
-        System.out.print("Valor do Boleto: ");
-        var boletoString = scanner.nextLine();
+        System.out.print("Bill value: $");
+        var billString = scanner.nextLine();
 
-        if(!(boletoString != null || boletoString.matches("-?\\d+(\\.\\d+)?"))){
-            System.out.println("O valor do boleto deve ser um Double.");
+        if(!(billString != null || billString.matches("-?\\d+(\\.\\d+)?"))){
+            System.out.println("The bill value must be a valid number.");
             return;
         }
 
-        var boleto = Double.parseDouble(boletoString);
+        var bill = Double.parseDouble(billString);
 
-        if(boleto <= 0){
-            System.out.println("O valor do boleto deve ser maior que 0.");
+        if(bill <= 0){
+            System.out.println("The bill value must be greater than 0.");
             return;
         }
 
-        if(boleto > conta.getSaldo()){
-            if(conta.getSaldo() + conta.getChequeEspecial() > boleto){
-                var opcao = "";
+        if(bill > account.getBalance()){
+            if(account.getBalance() + account.getSpecialCheck() > bill){
+                var option = "";
 
-                System.out.println("Saldo insuficiente!");
-                System.out.println("Saldo: R$" + conta.getSaldo() + "\nCheque Especial: R$" + conta.getChequeEspecial());
+                System.out.println("Insufficient balance.");
+                System.out.println("Balance: $" + account.getBalance() + "\nOverdraft: $" + account.getSpecialCheck());
                 do {
 
-                    System.out.print("Deseja utilizar o Cheque Especial (O valor de 20% será cobrado)?\n(S/N): ");
-                    opcao = scanner.nextLine();
+                    System.out.print("Do you want to use the overdraft? A 20% fee will be charged.\n(Y/N): ");
+                    option = scanner.nextLine();
                     
-                } while (!(opcao.equals("s")||opcao.equals("n")));
+                } while (!(option.equals("y")||option.equals("n")));
 
-                if(opcao.equals("s")){
-                    var resto = conta.getSaldo() - boleto;
-                    utilizarChequeEspecial(resto, conta);
-                    conta.setSaldo(0.0);
+                if(option.equals("y")){
+                    var rest = account.getBalance() - bill;
+                    useSpecialCheck(rest, account);
+                    account.setBalance(0.0);
                 }
             }
             return;
@@ -158,47 +158,47 @@ public class AccountService {
         }
         
 
-        conta.setSaldo(conta.getSaldo() - boleto);
+        account.setBalance(account.getBalance() - bill);
 
-        System.out.println("Pagamento Realizado!\n- R$" + boleto);
+        System.out.println("Payment completed!\n- $" + bill);
 
     }
 
-    public void abrirConta(Scanner scanner){
-        System.out.print("\nNome do Títular: ");
-        var nome = scanner.nextLine();
+    public void openAccount(Scanner scanner){
+        System.out.print("\nAccount holder's name: ");
+        var name = scanner.nextLine();
 
-        System.out.print("Saldo da conta: ");
-        var saldo = Double.parseDouble(scanner.nextLine());
+        System.out.print("Initial deposit: ");
+        var plunder = Double.parseDouble(scanner.nextLine());
 
-        var conta = new Account();
-        conta.setNome(nome);
+        var account = new Account();
+        account.setName(name);
         
-        repository.salvarConta(conta, saldo);
+        repository.saveAccount(account, plunder);
 
-        conta.setChequeEspecial(calcularChequeEspecial(conta));
+        account.setSpecialCheck(calculateSpecialCheck(account));
 
-        System.out.println("Conta Registrada com Sucesso!\nNome: " + conta.getNome() + "\nID: " + conta.getId());
+        System.out.println("Account registered successfully!\nName: " + account.getName() + "\nID: " + account.getId());
     }
 
-    private Double calcularChequeEspecial(Account conta){
+    private Double calculateSpecialCheck(Account account){
 
-        if(conta.getSaldo() > 500){
-            return conta.getSaldo()/2; 
+        if(account.getBalance() > 500){
+            return account.getBalance()/2; 
         }
 
         return 50.0;
 
     }
 
-    private void utilizarChequeEspecial(Double valor, Account conta){
-        valor = valor + (valor * 20) / 100;
+    private void useSpecialCheck(Double value, Account account){
+        value = value + (value * 20) / 100;
         
-        conta.setChequeEspecial(conta.getChequeEspecial() + valor);
+        account.setSpecialCheck(account.getSpecialCheck() + value);
     }
 
-    private Long questionarId(Scanner scanner){
-        System.out.print("\nID da Conta: ");
+    private Long questionId(Scanner scanner){
+        System.out.print("\nAccount ID: ");
         return Long.valueOf(scanner.nextLine());
     }
 
