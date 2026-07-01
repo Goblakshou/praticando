@@ -1,61 +1,20 @@
-package dio.pm.praticando;
+package main.java.dio.pm.praticando;
 
-import java.time.LocalDateTime;
-
-import dio.pm.praticando.domain.Employee;
-import dio.pm.praticando.domain.Manager;
-import dio.pm.praticando.domain.Salesman;
+import main.java.dio.pm.praticando.domain.BRLClock;
+import main.java.dio.pm.praticando.domain.Clock;
+import main.java.dio.pm.praticando.domain.USClock;
 
 public class PraticandoApplication {
 
 	public static void main(String[] args) {
-	
-		Employee manager = new Manager("456", "Pedro", "Itupeva", 5000.00, LocalDateTime.now());
-		Employee salesman =  new Salesman("123", "Cleber", "Jundiai", 2800.00, LocalDateTime.now());
+		BRLClock brlClock = new BRLClock(13, 25, 7);
+		USClock usClock = new USClock(15, 41, 10);
+		brlClock.calculateTime(brlClock);
+		usClock.calculateTime(usClock);
 
-		printEmployee(manager);
-		printEmployee(salesman);
+		System.out.println(brlClock.printClock());
+		System.out.println(usClock.printClock());
 
-	}
-
-	private static void printEmployee(Employee employee){
-
-		switch (employee) {
-			case Manager manager -> {
-
-				manager.setLogin("pedro");
-				manager.setPassword("ordep");
-				manager.setComission(10);
-
-				System.out.printf("=====%s=====\n", manager.getClass().getSimpleName());
-				System.out.println(manager.getAddress());
-				System.out.println(manager.getBirth());
-				System.out.println(manager.getCode());
-				System.out.println(manager.getLogin());
-				System.out.println(manager.getName());
-				System.out.println(manager.getPassword());
-				System.out.println(manager.getSalary());
-				System.out.println("==========");
-				
-			}
-			case Salesman salesman -> {
-				
-				salesman.setPercentualPerSold(10);
-				salesman.setSoldAmount(200.00);
-				
-				System.out.printf("=====%s=====\n", salesman.getClass().getSimpleName());
-				System.out.println(salesman.getAddress());
-				System.out.println(salesman.getBirth());
-				System.out.println(salesman.getCode());
-				System.out.println(salesman.getPercentualPerSold());
-				System.out.println(salesman.getName());
-				System.out.println(salesman.getSalary());
-				System.out.println("==========");
-
-			}
-		}
-
-		System.out.println(employee.getFullSalary());
 	}
 
 }
