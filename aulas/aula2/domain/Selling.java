@@ -1,4 +1,4 @@
-package main.java.dio.pm.praticando.domain;
+package main.java.dio.pm.praticando.aula2.domain;
 
 public final class Selling {
 

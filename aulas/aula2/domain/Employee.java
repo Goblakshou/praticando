@@ -1,8 +1,12 @@
-package main.java.dio.pm.praticando.domain;
+package main.java.dio.pm.praticando.aula2.domain;
+
+import main.java.dio.pm.praticando.aula2.Manager;
+import main.java.dio.pm.praticando.aula2.SalesMan;
+import main.java.dio.pm.praticando.aula2.Selling;
 
 import java.util.Scanner;
 
-public abstract sealed class Employee permits Manager, SalesMan, Attendant{
+public abstract sealed class Employee permits Manager, SalesMan, main.java.dio.pm.praticando.aula2.domain.Attendant {
 
     private final String name;
 
@@ -99,5 +103,5 @@ public abstract sealed class Employee permits Manager, SalesMan, Attendant{
     public abstract String printInterface();
 
     public abstract void printFirstOption(Selling selling);
-    public abstract void printSecondOption(Selling selling);
+    public abstract void printSecondOption(main.java.dio.pm.praticando.aula2.domain.Selling selling);
 }

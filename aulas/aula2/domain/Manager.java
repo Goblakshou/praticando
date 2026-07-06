@@ -1,6 +1,8 @@
-package main.java.dio.pm.praticando.domain;
+package main.java.dio.pm.praticando.aula2.domain;
 
-public final class Manager extends Employee{
+import main.java.dio.pm.praticando.aula2.Selling;
+
+public final class Manager extends main.java.dio.pm.praticando.aula2.domain.Employee {
 
     public Manager(String name, String email, String password) {
         super(name, email, password, true);
@@ -17,7 +19,7 @@ public final class Manager extends Employee{
     }
 
     @Override
-    public void printSecondOption(Selling selling) {
+    public void printSecondOption(main.java.dio.pm.praticando.aula2.domain.Selling selling) {
         if(selling.getSellingHistory() == null){
             System.out.println("No sales");
             return;

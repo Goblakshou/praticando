@@ -1,8 +1,11 @@
-package main.java.dio.pm.praticando.domain;
+package main.java.dio.pm.praticando.aula2.domain;
+
+import main.java.dio.pm.praticando.aula2.Employee;
+import main.java.dio.pm.praticando.aula2.Selling;
 
 import java.util.Scanner;
 
-public final class Attendant extends Employee{
+public final class Attendant extends Employee {
 
     public Attendant(String name, String email, String password) {
         super(name, email, password, false);
@@ -24,7 +27,7 @@ public final class Attendant extends Employee{
     }
 
     @Override
-    public void printSecondOption(Selling selling) {
+    public void printSecondOption(main.java.dio.pm.praticando.aula2.domain.Selling selling) {
         if(selling.getSellingHistory() == null){
             System.out.println("No sales");
             return;
